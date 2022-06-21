@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AbstractDataModel } from './components/qt-table/abstract-data-model';
+import { DataModel } from './components/qt-table/data-model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'qt-angular';
+
+  model: AbstractDataModel = new DataModel();
+
+  constructor() {
+    
+  }
 }

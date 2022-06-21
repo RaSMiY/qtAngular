@@ -1,15 +1,15 @@
 <table>
     <thead>
         <tr>
-            <th *ngFor="let column of columns">
-                {{column}}
+            <th *ngFor="let column of columnCount(); index as col_index">
+                {{dataHeader(col_index)}}
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of rows; index as row_index">
-            <td *ngFor="let column of columns; index as col_index">
-                {{rows[row_index][col_index]}}
+        <tr *ngFor="let row of rowCount(); index as row_index">
+            <td *ngFor="let column of columnCount(); index as col_index">
+                {{data(row_index, col_index)}}
             </td>
         </tr>
     </tbody>
