@@ -15,4 +15,8 @@ export class AppComponent {
   constructor() {
     
   }
+
+  onButtonClick() {
+    console.log('buttonClicked');
+  }
 }
