@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { takeUntil, tap } from 'rxjs/operators';
 import { DestroyService } from 'src/app/services/destroy.service';
 import { AbstractDataModel, Direction } from './abstract-data-model';
@@ -10,10 +10,13 @@ import { EmptyDataModel } from './empty-data-model';
   styleUrls: ['./qt-table.component.scss'],
   providers: [
     DestroyService
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QtTableComponent implements OnInit {
-  @Input() model: AbstractDataModel = new EmptyDataModel();
+  @Input() dataModel: AbstractDataModel = new EmptyDataModel();
+  
+  model: AbstractDataModel = new EmptyDataModel();
 
   constructor(
     private readonly destroy$: DestroyService
@@ -21,6 +24,7 @@ export class QtTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setModel(this.dataModel);
   }
 
   rowCount(): Array<any> {

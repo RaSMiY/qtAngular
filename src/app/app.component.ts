@@ -5,7 +5,7 @@ import { DataModel } from './components/qt-table/data-model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'qt-angular';
@@ -17,6 +17,6 @@ export class AppComponent {
   }
 
   onButtonClick() {
-    console.log('buttonClicked');
+    this.model.dataChanged.next([20, 25]);
   }
 }
