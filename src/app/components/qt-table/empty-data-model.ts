@@ -13,5 +13,7 @@ export class EmptyDataModel implements AbstractDataModel {
         return '';
     }
 
+    setData = (row: number, column: number, value: any, role: number) => {}
+
     dataChanged = new Subject<[number, number]>();
 }

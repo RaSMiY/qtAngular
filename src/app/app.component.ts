@@ -17,6 +17,6 @@ export class AppComponent {
   }
 
   onButtonClick() {
-    this.model.dataChanged.next([20, 25]);
+    this.model.setData(20, 25, 16, 1);
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { DestroyService } from 'src/app/services/destroy.service';
@@ -19,10 +19,11 @@ export class QtTableComponent implements OnInit, OnDestroy {
   
   model: AbstractDataModel = new EmptyDataModel();
 
-  private _subscription$: Subscription;
+  // private _subscription$: Subscription;
 
   constructor(
-    private readonly destroy$: DestroyService
+    private readonly destroy$: DestroyService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -35,7 +36,7 @@ export class QtTableComponent implements OnInit, OnDestroy {
   }
   
   disconnect() {
-    this._subscription$.unsubscribe();
+    // this._subscription$?.unsubscribe();
   }
 
   rowCount(): Array<any> {
@@ -48,9 +49,10 @@ export class QtTableComponent implements OnInit, OnDestroy {
 
   setModel(model: AbstractDataModel) {
     this.model = model;
-    this._subscription$ = this.model.dataChanged.asObservable().pipe(
+    /* this._subscription$ = */ this.model.dataChanged.asObservable().pipe(
       tap(event => {
-        console.log('dataChanged', event)
+        console.log('dataChanged', event);
+        this.cdr.detectChanges();
       }),
       takeUntil(this.destroy$)
     ).subscribe();

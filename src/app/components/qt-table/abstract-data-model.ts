@@ -10,6 +10,7 @@ export interface AbstractDataModel {
     rowCount: () => number;
     columnCount: () => number;
     dataHeader: (index: number, direction: Direction, role: number) => any;
+    setData: (row: number, column: number, value: any, role: number) => void;
 
     dataChanged: Subject<[number, number]>;
 }
